@@ -5,40 +5,42 @@ const c = initContract();
 
 const authContract = c.router(
   {
-    createAccount: {
+    createUser: {
       method: 'POST',
-      path: '/create',
-      summary: 'Create an account',
+      path: '/user',
       body: z.object({
-        email: z.string({ message: 'Must be a string' }).email('Invalid email'),
-        password: z.string({ message: 'Must be a string' }),
+        email: z.string().email('Invalid email'),
+        password: z.string(),
       }),
       responses: {
-        201: null,
-        400: z.object({
-          error: z.string(),
-        }),
-      },
-    },
-    login: {
-      method: 'POST',
-      path: '/login',
-      summary: 'Log in',
-      body: z.object({
-        email: z.string({ message: 'Must be a string' }).email('Invalid email'),
-        password: z.string({ message: 'Must be a string' }),
-      }),
-      responses: {
-        200: null,
+        201: z.null(),
         400: z.object({
           error: z.string(),
         }),
       },
     },
   },
+  { pathPrefix: '/auth' },
+);
+
+const eventsContract = c.router(
   {
-    pathPrefix: '/auth',
+    createUser: {
+      method: 'POST',
+      path: '/user',
+      body: z.object({
+        email: z.string().email('Invalid email'),
+        password: z.string(),
+      }),
+      responses: {
+        201: z.null(),
+        400: z.object({
+          error: z.string(),
+        }),
+      },
+    },
   },
+  { pathPrefix: '/auth' },
 );
 
 const contract = c.router({

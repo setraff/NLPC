@@ -2,16 +2,15 @@ import { Controller } from '@nestjs/common';
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 import contract from 'src/contract';
 
-@Controller('auth')
+@Controller()
 export class AuthController {
-  @TsRestHandler(contract.auth)
-  handler() {
-    return tsRestHandler(contract.auth, {
-      login: ({ body }) => {
-        return {
-          status: 200,
-        };
-      },
+  @TsRestHandler(contract.auth.createUser)
+  createUser() {
+    return tsRestHandler(contract.auth.createUser, async () => {
+      return {
+        status: 201,
+        body: null,
+      };
     });
   }
 }
