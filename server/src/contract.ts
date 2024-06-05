@@ -1,5 +1,6 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
+import errorResponseSchema from './utils/errorResponseSchema';
 
 const c = initContract();
 
@@ -14,29 +15,14 @@ const authContract = c.router(
       }),
       responses: {
         201: z.null(),
-        400: z.object({
-          error: z.string(),
-        }),
+        400: errorResponseSchema,
       },
     },
-  },
-  { pathPrefix: '/auth' },
-);
-
-const eventsContract = c.router(
-  {
-    createUser: {
-      method: 'POST',
-      path: '/user',
-      body: z.object({
-        email: z.string().email('Invalid email'),
-        password: z.string(),
-      }),
+    me: {
+      method: 'GET',
+      path: '/me',
       responses: {
-        201: z.null(),
-        400: z.object({
-          error: z.string(),
-        }),
+        200: z.null(),
       },
     },
   },

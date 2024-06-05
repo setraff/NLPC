@@ -4,13 +4,21 @@ import contract from 'src/contract';
 
 @Controller()
 export class AuthController {
-  @TsRestHandler(contract.auth.createUser)
-  createUser() {
-    return tsRestHandler(contract.auth.createUser, async () => {
-      return {
-        status: 201,
-        body: null,
-      };
+  @TsRestHandler(contract.auth)
+  handler() {
+    return tsRestHandler(contract.auth, {
+      async createUser() {
+        return {
+          status: 201,
+          body: null,
+        };
+      },
+      async me() {
+        return {
+          status: 200,
+          body: null,
+        };
+      },
     });
   }
 }
