@@ -6,18 +6,6 @@ const c = initContract();
 
 const authContract = c.router(
   {
-    createUser: {
-      method: 'POST',
-      path: '/user',
-      body: z.object({
-        email: z.string().email('Invalid email'),
-        password: z.string(),
-      }),
-      responses: {
-        201: z.null(),
-        400: errorResponseSchema,
-      },
-    },
     me: {
       method: 'GET',
       path: '/me',
