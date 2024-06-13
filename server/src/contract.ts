@@ -2,9 +2,9 @@ import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 import errorResponseSchema from './utils/errorResponseSchema';
 
-const c = initContract();
+const contract = initContract();
 
-const authContract = c.router(
+const authContract = contract.router(
   {
     me: {
       method: 'GET',
@@ -17,8 +17,8 @@ const authContract = c.router(
   { pathPrefix: '/auth' },
 );
 
-const contract = c.router({
+const c = contract.router({
   auth: authContract,
 });
 
-export default contract;
+export default c;

@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
-  firebaseUserId Int
+  auth0UserId Int
   name String?
   events Event[]
 }
