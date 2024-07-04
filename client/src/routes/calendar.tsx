@@ -4,6 +4,7 @@ import { IoChevronForward } from "react-icons/io5";
 import Button from "../components/Button/Button";
 import { IoIosLogOut } from "react-icons/io";
 import { LuCalendarPlus } from "react-icons/lu";
+import EventCreator from "../components/EventCreator/EventCreator";
 
 export const Route = createFileRoute("/calendar")({
   component: () => (
@@ -41,9 +42,7 @@ export const Route = createFileRoute("/calendar")({
           );
         })}
       </div>
-      <div className="fixed border-2 hover:border-@SkyBlue cursor-pointer bg-@Crayola desktop:bottom-16 desktop:right-12 bottom-48 right-7 p-5 text-white drop-shadow-xl rounded-full">
-        <LuCalendarPlus size={35} />
-      </div>
+      <EventCreator />
     </>
   ),
 });
