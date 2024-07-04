@@ -2,11 +2,11 @@ import express from "express";
 import t from "./trpc/trpc";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import router from "./trpc/appRouter";
-import { createContext } from "./trpc/context";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import helmet from "helmet";
+import { createContext } from "./trpc/createContext";
 
 const app = express();
 
