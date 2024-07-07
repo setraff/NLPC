@@ -72,7 +72,9 @@ export const Route = createFileRoute("/calendar")({
                 <div className="w-full border-l-4 border-green-500 px-1">
                   Meeting
                 </div>
-                <div className="w-full bg-purple-500 text-white px-1">Gym</div>
+                <div className="w-full bg-purple-500 text-white px-1">
+                  Hello
+                </div>
               </div>
             );
           })}
