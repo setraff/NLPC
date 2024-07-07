@@ -25,7 +25,6 @@ const eventsRouter = t.router({
         data: {
           auth0UserId: ctx.auth0UserId,
           title: input.title,
-          description: input.description,
           startDateTime: input.startDateTime,
           endDateTime: input.endDateTime,
           colorHex: generateRandomHexColor(),

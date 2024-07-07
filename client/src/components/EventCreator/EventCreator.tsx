@@ -1,7 +1,10 @@
 import { Dialog, DialogPanel } from "@headlessui/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { LuCalendarPlus } from "react-icons/lu";
 import Button from "../Button/Button";
+import TextField from "@mui/material/TextField";
+import { HexColorPicker } from "react-colorful";
+import ColorPicker from "../ColorPicker/ColorPicker";
 
 const EventCreator = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,11 +36,21 @@ const EventCreator = () => {
               transition
               className="w-full max-w-md flex flex-col items-center space-y-5 rounded-xl bg-white z-20 p-6 duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
             >
-              <div>Title</div>
-              <div>Description</div>
-              <div>From</div>
-              <div>To</div>
-              <div>Color</div>
+              <TextField label="Title" className="w-full" />
+              <div className="w-full grid grid-cols-2 gap-2">
+                <TextField
+                  onChange={(v) => console.log(v.target.value)}
+                  type="datetime-local"
+                  helperText="From"
+                  className="w-full"
+                />
+                <TextField
+                  type="datetime-local"
+                  helperText="To"
+                  className="w-full"
+                />
+              </div>
+              <ColorPicker value={"#FF0000"} />
               <Button className="w-full">Create</Button>
             </DialogPanel>
           </div>

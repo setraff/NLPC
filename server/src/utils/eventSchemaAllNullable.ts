@@ -1,11 +1,10 @@
 import * as yup from "yup";
 
 const eventSchemaAllNullable = yup.object({
-  title: yup.string().notRequired(),
-  description: yup.string().notRequired(),
-  startDateTime: yup.string().datetime("Invalid datetime").notRequired(),
-  endDateTime: yup.string().datetime("Invalid datetime").notRequired(),
-  color: yup.string().notRequired(),
+  title: yup.string().nullable(),
+  startDateTime: yup.string().datetime().nullable(),
+  endDateTime: yup.string().datetime().nullable(),
+  colorHex: yup.string().nullable(),
 });
 
 export default eventSchemaAllNullable;

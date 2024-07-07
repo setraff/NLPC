@@ -1,5 +1,3 @@
-import { RSA } from "jwk-to-pem";
-
 interface Jwk {
   alg: string;
   kty: "RSA";
