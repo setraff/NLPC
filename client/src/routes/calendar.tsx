@@ -7,10 +7,13 @@ import MonthSelector from "../components/MonthSelector/MonthSelector";
 import getDaysInMonth from "../utils/getDaysInMonth";
 import { cn } from "../utils/cn";
 import { useState } from "react";
-import { DateTime } from "luxon";
+import { PiUser } from "react-icons/pi";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const Route = createFileRoute("/calendar")({
   component: () => {
+    const auth0 = useAuth0();
+
     const [month, setMonth] = useState(new Date());
     return (
       <>
@@ -36,7 +39,9 @@ export const Route = createFileRoute("/calendar")({
               className="text-xl cursor-pointer hover:text-@SkyBlue"
             />
           </div>
-          <Button className="bg-pink-500">R</Button>
+          <Button className="w-[3.25rem] h-[3.25rem] min-w-[3.25rem] rounded-full bg-pink-500">
+            <PiUser className="text-3xl" />
+          </Button>
         </div>
         <div className="w-full grid grid-cols-7 bg-white rounded-md">
           <div className="w-full p-2  flex justify-center items-center">

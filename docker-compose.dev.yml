@@ -1,5 +1,12 @@
 services:
-  server:
-    build:
-      context: ./server
-      dockerfile: dev.Dockerfile
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=example
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  pgdata:

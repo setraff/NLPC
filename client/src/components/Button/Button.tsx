@@ -10,6 +10,7 @@ interface IButton
 const Button: React.FC<IButton> = (p) => {
   return (
     <button
+      {...p}
       className={cn(
         "border-2 rounded-md h-12 min-w-24 flex justify-center items-center bg-@Crayola text-white hover:border-@SkyBlue",
         p.className || ""
