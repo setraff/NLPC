@@ -10,7 +10,7 @@ const Auth0Provider: React.FC<IAuthProvder> = (p) => {
       clientId="NphpiEywgK7mdQMs8ThO3qRYRCXzrNSL"
       domain={"dev-jdrx3kw7potdyibs.us.auth0.com"}
       authorizationParams={{
-        redirect_uri: "http://localhost:5173/calendar",
+        redirect_uri: "http://localhost:5173/",
       }}
     >
       {p.children}

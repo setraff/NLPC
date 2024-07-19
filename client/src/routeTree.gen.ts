@@ -11,15 +11,9 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as CalendarImport } from './routes/calendar'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
-
-const CalendarRoute = CalendarImport.update({
-  path: '/calendar',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',
@@ -37,19 +31,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/calendar': {
-      id: '/calendar'
-      path: '/calendar'
-      fullPath: '/calendar'
-      preLoaderRoute: typeof CalendarImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute, CalendarRoute })
+export const routeTree = rootRoute.addChildren({ IndexRoute })
 
 /* prettier-ignore-end */
 
@@ -59,15 +46,11 @@ export const routeTree = rootRoute.addChildren({ IndexRoute, CalendarRoute })
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/calendar"
+        "/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/calendar": {
-      "filePath": "calendar.tsx"
     }
   }
 }
