@@ -4,9 +4,11 @@ import getPreciseHours from "../../utils/getPreciseHours";
 import colorToRgba from "../../utils/colorToRgba";
 import { oneHourInRem } from "../../utils/oneHourInRem";
 import { twentyFourHours } from "../../utils/twentyFourHours";
+import { cn } from "../../utils/cn";
 
 interface IEventsForDay {
   events: Event[];
+  className?: string;
 }
 
 const EventsForDay: React.FC<IEventsForDay> = (p) => {
@@ -15,7 +17,7 @@ const EventsForDay: React.FC<IEventsForDay> = (p) => {
       style={{
         height: `${oneHourInRem * 24}rem`,
       }}
-      className="rounded-sm relative flex flex-col w-full"
+      className={cn("rounded-sm relative flex flex-col w-full", p.className)}
     >
       <div
         style={{

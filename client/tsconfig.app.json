@@ -19,9 +19,10 @@
 
     /* Linting */
     "strict": true,
+    "rootDir": "../",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src", "../server/src"]
 }

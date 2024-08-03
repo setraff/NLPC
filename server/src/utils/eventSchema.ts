@@ -1,10 +1,10 @@
 import * as yup from "yup";
 
 const eventSchema = yup.object({
-  title: yup.string().required(),
-  startDateTime: yup.string().datetime().required(),
-  endDateTime: yup.string().datetime().required(),
-  colorHex: yup.string().required(),
+  name: yup.string().required("Event name is required"),
+  startDateTime: yup.string().required("Start date & time is required"),
+  endDateTime: yup.string().required("End date & time is required"),
+  color: yup.string(),
 });
 
 export default eventSchema;

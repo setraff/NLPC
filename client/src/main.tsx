@@ -8,6 +8,7 @@ import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 import Auth0Provider from "./contexts/Auth0Provider";
+import TrpcAndQueryClientProviders from "./contexts/TrpcAndQueryClientProviders";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -27,7 +28,9 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <LocalizationProvider dateAdapter={AdapterLuxon}>
         <Auth0Provider>
-          <RouterProvider router={router} />
+          <TrpcAndQueryClientProviders>
+            <RouterProvider router={router} />
+          </TrpcAndQueryClientProviders>
         </Auth0Provider>
       </LocalizationProvider>
     </StrictMode>

@@ -11,6 +11,7 @@ const Auth0Provider: React.FC<IAuthProvder> = (p) => {
       domain={"dev-jdrx3kw7potdyibs.us.auth0.com"}
       authorizationParams={{
         redirect_uri: "http://localhost:5173/",
+        audience: "https://dev-jdrx3kw7potdyibs.us.auth0.com/api/v2/",
       }}
     >
       {p.children}

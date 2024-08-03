@@ -50,6 +50,32 @@ const Calendar: React.FC<ICalendar> = (p) => {
           </div>
         </div>
       );
+    case "Day":
+      return (
+        <div className="w-full grid grid-cols-8 gap-3">
+          <div className="w-full h-full relative gid-cols-1">
+            {twentyFourHours.map((h) => {
+              return (
+                <div
+                  style={{ top: `${oneHourInRem * h}rem` }}
+                  className="absolute w-full h-[1px] bg-gray-200"
+                >
+                  <div className="p-2 text-gray-700">{h}:00</div>
+                </div>
+              );
+            })}
+          </div>
+          <EventsForDay className="col-span-7" events={eventsDay1} />
+        </div>
+      );
+    case "Month":
+      return (
+        <div className="w-full h-full grid grid-cols-7">
+          {new Array(35).fill(null).map(() => {
+            return <div className="border w-full h-full"></div>;
+          })}
+        </div>
+      );
   }
 };
 

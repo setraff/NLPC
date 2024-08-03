@@ -2,27 +2,27 @@ import Event from "../types/Event";
 
 export const eventsDay1: Event[] = [
   {
-    name: "Team Meeting",
-    startDateTime: new Date("2024-07-19T09:00:00"),
-    endDateTime: new Date("2024-07-19T10:00:00"),
-    color: "Blue",
-  },
-  {
     name: "Gooning Session",
     startDateTime: new Date("2024-07-19T00:00:00"),
     endDateTime: new Date("2024-07-19T04:30:00"),
     color: "Pink",
   },
   {
-    name: "Client Presentation",
-    startDateTime: new Date("2024-07-19T11:00:00"),
-    endDateTime: new Date("2024-07-19T12:00:00"),
+    name: "Work",
+    startDateTime: new Date("2024-07-19T08:00:00"),
+    endDateTime: new Date("2024-07-19T16:00:00"),
     color: "Green",
   },
   {
-    name: "Lunch Break",
-    startDateTime: new Date("2024-07-19T12:30:00"),
-    endDateTime: new Date("2024-07-19T13:30:00"),
+    name: "School",
+    startDateTime: new Date("2024-07-18T18:00:00"),
+    endDateTime: new Date("2024-07-22T20:00:00"),
+    color: "Yellow",
+  },
+  {
+    name: "Siege",
+    startDateTime: new Date("2024-07-18T22:30:00"),
+    endDateTime: new Date("2024-07-22T23:59:59"),
     color: "Yellow",
   },
 ];

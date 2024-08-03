@@ -24,10 +24,10 @@ const eventsRouter = t.router({
       const created = await p.event.create({
         data: {
           auth0UserId: ctx.auth0UserId,
-          title: input.title,
+          title: input.name,
           startDateTime: input.startDateTime,
           endDateTime: input.endDateTime,
-          colorHex: generateRandomHexColor(),
+          color: input.color || "Blue",
         },
       });
       return created;
