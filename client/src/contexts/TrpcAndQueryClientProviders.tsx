@@ -20,7 +20,6 @@ const TrpcAndQueryClientProviders: React.FC<ITrpcAndQueryClientProviders> = (
         url: "http://localhost:3001/trpc",
         async headers() {
           const accessToken = await auth0.getAccessTokenSilently();
-          console.log(accessToken);
           return {
             authorization: `Bearer ${accessToken}`,
           };

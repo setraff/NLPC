@@ -16,6 +16,7 @@ import { FaCheck } from "react-icons/fa";
 import ColorSelect from "../ColorSelect/ColorSelect";
 import eventSchema from "../../../../server/src/utils/eventSchema";
 import { trpc } from "../../utils/trpc";
+import Prompt from "../Prompt/Prompt";
 
 interface INewEventForm {
   children: React.ReactNode;
@@ -45,6 +46,7 @@ const NewEventForm: React.FC<INewEventForm> = (p) => {
       initialValues={initialValues}
     >
       <Form className="flex flex-col space-y-5">
+        <Prompt />
         <FormikTextField name="name" label="Event name" />
         <div className="w-full grid grid-cols-2 gap-5">
           <FormikDateTimeField name="startDateTime" label="Start Date & Time" />

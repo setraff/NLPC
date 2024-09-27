@@ -16,6 +16,7 @@ import {
 } from "../../data/events";
 import { oneHourInRem } from "../../utils/oneHourInRem";
 import { twentyFourHours } from "../../utils/twentyFourHours";
+import EventsForDayQuery from "../EventsForDayQuery/EventsForDayQuery";
 
 interface ICalendar {
   type: CalendarType;
@@ -65,7 +66,7 @@ const Calendar: React.FC<ICalendar> = (p) => {
               );
             })}
           </div>
-          <EventsForDay className="col-span-7" events={eventsDay1} />
+          <EventsForDayQuery />
         </div>
       );
     case "Month":

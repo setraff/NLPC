@@ -31,9 +31,9 @@ const EventsForDay: React.FC<IEventsForDay> = (p) => {
           <div
             key={e.name}
             style={{
-              height: `${(getPreciseHours(e.endDateTime) - getPreciseHours(e.startDateTime)) * oneHourInRem}rem`,
-              top: `${getPreciseHours(e.startDateTime) * oneHourInRem}rem`,
-              backgroundColor: colorToRgba(e.color, 0.2),
+              height: `${(getPreciseHours(new Date(e.endDateTime)) - getPreciseHours(new Date(e.startDateTime))) * oneHourInRem}rem`,
+              top: `${getPreciseHours(new Date(e.startDateTime)) * oneHourInRem}rem`,
+              backgroundColor: colorToRgba(e.color || "Blue", 0.2),
               borderColor: e.color,
               borderWidth: "1px",
               minHeight: `${oneHourInRem}rem`,

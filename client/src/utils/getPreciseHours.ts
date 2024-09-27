@@ -1,8 +1,10 @@
 function getPreciseHours(date: Date) {
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
-  const milliseconds = date.getMilliseconds();
+  const dateUTC = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+
+  const hours = dateUTC.getHours();
+  const minutes = dateUTC.getMinutes();
+  const seconds = dateUTC.getSeconds();
+  const milliseconds = dateUTC.getMilliseconds();
 
   // Convert each component to hours and sum them
   const preciseHours =

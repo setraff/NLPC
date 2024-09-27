@@ -4,6 +4,8 @@ import jwt from "jsonwebtoken";
 import getJwks from "../../utils/getJwks";
 import jwkToPem from "jwk-to-pem";
 import getUser from "../../utils/getUser";
+import jwksClient from "jwks-rsa";
+import axios from "axios";
 
 const privateProcedure = t.procedure.use(async ({ ctx, next }) => {
   const accessToken = ctx.accessToken;
@@ -15,41 +17,53 @@ const privateProcedure = t.procedure.use(async ({ ctx, next }) => {
     });
   }
 
-  const header = jwt.decode(accessToken, { complete: true })?.header;
+  const decoded = jwt.decode(accessToken, { complete: true });
 
-  if (!header) {
+  if (!decoded) {
     throw new TRPCError({
       message: "Invalid header",
       code: "UNAUTHORIZED",
     });
   }
 
-  const keys = await getJwks();
-  const headerKid = header.kid;
-  const matchingKey = keys.find((k) => k.kid === headerKid);
+  const { header, signature, payload } = decoded;
 
-  if (!matchingKey) {
-    throw new TRPCError({
-      message: "Invalid token",
-      code: "UNAUTHORIZED",
-    });
-  }
+  const { data: configuration } = await axios.get(
+    `https://${process.env.AUTH0_DOMAIN}.us.auth0.com/.well-known/openid-configuration`
+  );
 
-  const pemPublicKey = jwkToPem(matchingKey);
-  jwt.verify(accessToken, pemPublicKey, {
-    //@ts-ignore
-    algorithms: [header.alg],
-    issuer: process.env.AUTH0_DOMAIN,
+  const issuer = configuration.issuer;
+  const jwksUri = configuration.jwks_uri;
+  const algorithms =
+    configuration.token_endpoint_auth_signing_alg_values_supported;
+
+  const client = jwksClient({
+    jwksUri,
+  });
+
+  const key = await client.getSigningKey(header.kid);
+  const publicKey = key.getPublicKey();
+
+  const thing = jwt.verify(accessToken, publicKey, {
+    algorithms: algorithms,
+    issuer,
   });
 
   const user = await getUser(accessToken);
 
-  return next({
-    ctx: {
-      email: user.email,
-      auth0UserId: user.sub,
-    },
-  });
+  if (user.sub) {
+    return next({
+      ctx: {
+        email: user,
+        auth0UserId: user.sub,
+      },
+    });
+  } else {
+    throw new TRPCError({
+      message: "User ID not found",
+      code: "INTERNAL_SERVER_ERROR",
+    });
+  }
 });
 
 export default privateProcedure;

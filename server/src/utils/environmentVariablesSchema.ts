@@ -18,4 +18,7 @@ export const environmentVariablesSchema = yup.object({
   DATABASE_URL: yup
     .string()
     .required("Missing Environment Variable: DATABASE_URL"),
+  NLP_SERVER_URL: yup
+    .string()
+    .required("Missing Environment Variable: NLP_SERVER_URL"),
 });

@@ -9,15 +9,24 @@ import eventSchemaAllNullable from "../utils/eventSchemaAllNullable";
 import filterTruthyKeys from "../utils/filterTruthyKeys";
 
 const eventsRouter = t.router({
-  getEvents: privateProcedure.query(async ({ ctx }) => {
-    const userId = ctx.auth0UserId;
-    const events = await p.event.findMany({
-      where: {
-        auth0UserId: userId,
-      },
-    });
-    return events;
-  }),
+  getEventsForDay: privateProcedure
+    .input(yup.object({ day: yup.string().required() }))
+    .query(async ({ ctx, input }) => {
+      console.log(input);
+      const events = await p.event.findMany({
+        where: {
+          auth0UserId: ctx.auth0UserId,
+          startDateTime: {
+            lte: input.day,
+          },
+          endDateTime: {
+            gte: input.day,
+          },
+        },
+      });
+
+      return events;
+    }),
   createEvent: privateProcedure
     .input(eventSchema)
     .mutation(async ({ ctx, input }) => {
