@@ -17,40 +17,21 @@ import {
 import { oneHourInRem } from "../../utils/oneHourInRem";
 import { twentyFourHours } from "../../utils/twentyFourHours";
 import EventsForDayQuery from "../EventsForDayQuery/EventsForDayQuery";
+import useSelectedDay from "../../hooks/useSelectedDay";
+import getDaysOfWeek from "../../utils/getDaysOfWeek";
+import EventsForWeek from "../EventsForWeek/EventsForWeek";
 
 interface ICalendar {
   type: CalendarType;
 }
 
 const Calendar: React.FC<ICalendar> = (p) => {
+  const [selectedDay] = useSelectedDay();
+  const week = getDaysOfWeek(selectedDay).map((w) => new Date(w));
+
   switch (p.type) {
     case "Week":
-      return (
-        <div className="w-full h-full flex flex-col space-y-3">
-          <WeekDaySelect />
-          <div className="w-full h-full grid grid-cols-8 gap-3 items-center">
-            <div className="w-full h-full relative">
-              {twentyFourHours.map((h) => {
-                return (
-                  <div
-                    style={{ top: `${oneHourInRem * h}rem` }}
-                    className="absolute w-full h-[1px] bg-gray-200"
-                  >
-                    <div className="p-2 text-gray-700">{h}:00</div>
-                  </div>
-                );
-              })}
-            </div>
-            <EventsForDay events={eventsDay1} />
-            <EventsForDay events={eventsDay2} />
-            <EventsForDay events={eventsDay3} />
-            <EventsForDay events={eventsDay4} />
-            <EventsForDay events={eventsDay5} />
-            <EventsForDay events={eventsDay6} />
-            <EventsForDay events={eventsDay7} />
-          </div>
-        </div>
-      );
+      return <EventsForWeek />;
     case "Day":
       return (
         <div className="w-full grid grid-cols-8 gap-3">
@@ -66,7 +47,7 @@ const Calendar: React.FC<ICalendar> = (p) => {
               );
             })}
           </div>
-          <EventsForDayQuery />
+          <EventsForDayQuery selectedDay={selectedDay} />
         </div>
       );
     case "Month":

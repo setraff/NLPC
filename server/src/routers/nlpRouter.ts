@@ -15,7 +15,11 @@ const nlpRouter = t.router({
       const { data } = await nlpserver.post<ProcessedPrompt>("/", {
         text: input.text,
       });
-      return data;
+      return {
+        ...data,
+        From: data.From,
+        To: data.To,
+      };
     }),
 });
 

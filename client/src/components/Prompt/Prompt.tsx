@@ -6,7 +6,7 @@ import { useFormikContext } from "formik";
 
 const Prompt = () => {
   const [prompt, setPrompt] = useState("");
-  const [dPrompt] = useDebounce(prompt, 1000);
+  const [dPrompt] = useDebounce(prompt, 2000);
   const mutation = trpc.nlp.processPrompt.useMutation();
   const formik = useFormikContext();
 
@@ -17,8 +17,18 @@ const Prompt = () => {
         {
           onSuccess: (data) => {
             formik.setFieldValue("name", data.Title);
-            formik.setFieldValue("startDateTime", data.From);
-            formik.setFieldValue("endDateTime", data.To);
+            if (data.From) {
+              formik.setFieldValue(
+                "startDateTime",
+                new Date(data.From).toISOString()
+              );
+            }
+            if (data.To) {
+              formik.setFieldValue(
+                "endDateTime",
+                new Date(data.To).toISOString()
+              );
+            }
           },
         }
       );

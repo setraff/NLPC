@@ -1,6 +1,10 @@
 import * as yup from "yup";
-import eventSchema from "../../../server/src/utils/eventSchema";
 
-type Event = yup.InferType<typeof eventSchema>;
+interface Event {
+  title: string;
+  startDateTime: string;
+  endDateTime: string;
+  color: string;
+}
 
 export default Event;

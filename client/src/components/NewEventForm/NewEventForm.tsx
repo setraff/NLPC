@@ -17,13 +17,19 @@ import ColorSelect from "../ColorSelect/ColorSelect";
 import eventSchema from "../../../../server/src/utils/eventSchema";
 import { trpc } from "../../utils/trpc";
 import Prompt from "../Prompt/Prompt";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface INewEventForm {
   children: React.ReactNode;
 }
 
 const NewEventForm: React.FC<INewEventForm> = (p) => {
-  const newEventMutation = trpc.events.createEvent.useMutation();
+  const qc = useQueryClient();
+  const newEventMutation = trpc.events.createEvent.useMutation({
+    onSuccess: () => {
+      qc.invalidateQueries(["events.getEventsForDay"]);
+    },
+  });
 
   const initialValues = {
     name: "",

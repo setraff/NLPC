@@ -24,6 +24,7 @@ app.use(
   createExpressMiddleware({
     router: router,
     createContext: createContext,
+    onError: (e) => console.log(e.error),
   })
 );
 

@@ -7,24 +7,48 @@ import { Event } from "@prisma/client";
 import generateRandomHexColor from "../utils/generateRandomHexColor";
 import eventSchemaAllNullable from "../utils/eventSchemaAllNullable";
 import filterTruthyKeys from "../utils/filterTruthyKeys";
+import { DateTime, Interval } from "luxon";
+import getEventsForDay from "../utils/getEventsForDay";
+import getDaysOfWeek from "../utils/getDaysOfWeek";
 
 const eventsRouter = t.router({
   getEventsForDay: privateProcedure
     .input(yup.object({ day: yup.string().required() }))
     .query(async ({ ctx, input }) => {
-      console.log(input);
+      const start = new Date(input.day);
+      const end = DateTime.fromJSDate(new Date(input.day))
+        .plus({ day: 1 })
+        .toJSDate();
+      start.setHours(0, 0, 0);
+      end.setHours(0, 0, 0);
       const events = await p.event.findMany({
         where: {
           auth0UserId: ctx.auth0UserId,
           startDateTime: {
-            lte: input.day,
+            lt: end,
           },
           endDateTime: {
-            gte: input.day,
+            gte: start,
           },
         },
       });
 
+      return events;
+    }),
+  getEventsForWeek: privateProcedure
+    .input(
+      yup.object({
+        weekOf: yup.string().required(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const days = getDaysOfWeek(new Date(input.weekOf));
+      const events = [];
+      for (const day of days) {
+        if (day) {
+          events.push(await getEventsForDay(day, ctx.auth0UserId));
+        }
+      }
       return events;
     }),
   createEvent: privateProcedure

@@ -29,7 +29,7 @@ const EventsForDay: React.FC<IEventsForDay> = (p) => {
       {p.events.map((e) => {
         return (
           <div
-            key={e.name}
+            key={e.title}
             style={{
               height: `${(getPreciseHours(new Date(e.endDateTime)) - getPreciseHours(new Date(e.startDateTime))) * oneHourInRem}rem`,
               top: `${getPreciseHours(new Date(e.startDateTime)) * oneHourInRem}rem`,
@@ -40,7 +40,7 @@ const EventsForDay: React.FC<IEventsForDay> = (p) => {
             }}
             className="absolute rounded-md w-full border text-xs p-3 text-black font-medium"
           >
-            {e.name}
+            {e.title}
           </div>
         );
       })}

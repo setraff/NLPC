@@ -49,13 +49,10 @@ const privateProcedure = t.procedure.use(async ({ ctx, next }) => {
     issuer,
   });
 
-  const user = await getUser(accessToken);
-
-  if (user.sub) {
+  if (payload.sub && typeof payload.sub === "string") {
     return next({
       ctx: {
-        email: user,
-        auth0UserId: user.sub,
+        auth0UserId: payload.sub,
       },
     });
   } else {
