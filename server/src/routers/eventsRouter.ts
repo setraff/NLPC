@@ -10,6 +10,7 @@ import filterTruthyKeys from "../utils/filterTruthyKeys";
 import { DateTime, Interval } from "luxon";
 import getEventsForDay from "../utils/getEventsForDay";
 import getDaysOfWeek from "../utils/getDaysOfWeek";
+import { TRPCError } from "@trpc/server";
 
 const eventsRouter = t.router({
   getEventsForDay: privateProcedure

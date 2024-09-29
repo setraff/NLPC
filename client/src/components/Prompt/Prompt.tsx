@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { trpc } from "../../utils/trpc";
 import { useFormikContext } from "formik";
+import { FaQuestion } from "react-icons/fa";
+import { HiMiniSparkles } from "react-icons/hi2";
 
 const Prompt = () => {
   const [prompt, setPrompt] = useState("");
@@ -38,8 +40,14 @@ const Prompt = () => {
   return (
     <TextField
       value={prompt}
+      className="w-full"
       onChange={(e) => setPrompt(e.target.value)}
-      label="Prompt"
+      label={
+        <span className="flex items-center space-x-2">
+          <div>Prompt</div>
+          <HiMiniSparkles className="text-gray-400" />
+        </span>
+      }
       disabled={mutation.isLoading}
     />
   );
