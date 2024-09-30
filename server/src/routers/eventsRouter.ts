@@ -52,6 +52,22 @@ const eventsRouter = t.router({
       }
       return events;
     }),
+  getEventsForMonth: privateProcedure
+    .input(
+      yup.object({
+        monthOf: yup.string().required(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const days = getDaysOfWeek(new Date(input.monthOf));
+      const events = [];
+      for (const day of days) {
+        if (day) {
+          events.push(await getEventsForDay(day, ctx.auth0UserId));
+        }
+      }
+      return events;
+    }),
   createEvent: privateProcedure
     .input(eventSchema)
     .mutation(async ({ ctx, input }) => {

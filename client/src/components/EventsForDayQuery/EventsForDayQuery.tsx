@@ -14,7 +14,11 @@ const EventsForDayQuery: React.FC<IEventsForDayQuery> = (p) => {
 
   const events = (query.data || []).map((e) => ({ ...e, name: e.title }));
 
-  return <EventsForDay events={events} />;
+  return (
+    <div className=" col-span-7">
+      <EventsForDay events={events} />
+    </div>
+  );
 };
 
 export default EventsForDayQuery;
