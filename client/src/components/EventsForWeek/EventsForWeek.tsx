@@ -7,13 +7,26 @@ import getDaysOfWeek from "../../utils/getDaysOfWeek";
 import EventsForDayQuery from "../EventsForDayQuery/EventsForDayQuery";
 import { trpc } from "../../utils/trpc";
 import EventsForDay from "../EventsForDay/EventsForDay";
+import { useQueryClient } from "@tanstack/react-query";
+import { getQueryKey } from "@trpc/react-query";
 
 const EventsForWeek = () => {
   const [selectedDay] = useSelectedDay();
   const week = getDaysOfWeek(selectedDay).map((w) => new Date(w));
+  const qc = useQueryClient();
 
   const eventsForWeekQuery = trpc.events.getEventsForWeek.useQuery({
     weekOf: week[0].toISOString(),
+  });
+
+  const deleteMutation = trpc.events.deleteEvent.useMutation({
+    onSuccess(data, variables, context) {
+      qc.invalidateQueries(
+        getQueryKey(trpc.events.getEventsForWeek, {
+          weekOf: week[0].toISOString(),
+        })
+      );
+    },
   });
 
   const events = eventsForWeekQuery.data || [];
@@ -34,7 +47,12 @@ const EventsForWeek = () => {
           })}
         </div>
         {events?.map((e) => {
-          return <EventsForDay events={e} />;
+          return (
+            <EventsForDay
+              onDelete={(e) => deleteMutation.mutate({ eventId: e.id })}
+              events={e}
+            />
+          );
         })}
       </div>
     </div>

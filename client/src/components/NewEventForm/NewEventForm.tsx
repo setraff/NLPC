@@ -1,5 +1,5 @@
 import { Radio, RadioGroup } from "@headlessui/react";
-import { TextField } from "@mui/material";
+import { Alert, TextField } from "@mui/material";
 import {
   DateTimeField,
   DateTimePicker,
@@ -106,14 +106,14 @@ const NewEventForm: React.FC<INewEventForm> = (p) => {
         </div>
         <ColorSelect />
         {newEventMutation.isSuccess && (
-          <div className="w-full py-2 text-center font-semibold text-green-600 bg-green-100 rounded-md">
-            Event Created
-          </div>
+          <Alert severity="success">
+            Created event: {newEventMutation.data.title}
+          </Alert>
         )}
         {newEventMutation.error && (
-          <div className="w-full py-2 text-center font-semibold text-red-600 bg-red-100 rounded-md">
-            {newEventMutation.error.message}
-          </div>
+          <Alert severity="error">
+            Created event: {newEventMutation.error.message}
+          </Alert>
         )}
         {p.children}
       </Form>

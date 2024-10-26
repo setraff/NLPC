@@ -89,11 +89,12 @@ const eventsRouter = t.router({
       })
     )
     .mutation(async ({ input }) => {
-      return await p.event.delete({
+      const deletedEvent = await p.event.delete({
         where: {
           id: input.eventId,
         },
       });
+      return deletedEvent;
     }),
   updateEvent: privateProcedure
     .input(

@@ -3,12 +3,15 @@ import Event from "../../types/Event";
 import getPreciseHours from "../../utils/getPreciseHours";
 import colorToRgba from "../../utils/colorToRgba";
 import { oneHourInRem } from "../../utils/oneHourInRem";
-import { twentyFourHours } from "../../utils/twentyFourHours";
+import { MdDelete } from "react-icons/md";
 import { cn } from "../../utils/cn";
+import { FaEdit } from "react-icons/fa";
+import { LuDelete } from "react-icons/lu";
 
 interface IEventsForDay {
   events: Event[];
   className?: string;
+  onDelete?: (e: Event) => void;
 }
 
 const EventsForDay: React.FC<IEventsForDay> = (p) => {
@@ -40,7 +43,27 @@ const EventsForDay: React.FC<IEventsForDay> = (p) => {
             }}
             className="absolute rounded-md w-full border text-xs p-3 text-black font-medium"
           >
-            {e.title}
+            <div className="flex justify-between">
+              <span>{e.title}</span>
+              <div className="flex space-x-1 absolute top-1 right-1">
+                {/* <FaEdit
+                  className="hover:text-black transform hover:scale-105 transition-transform duration-200"
+                  color={e.color}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => null}
+                /> */}
+                <MdDelete
+                  className="text-lg transform hover:scale-105 transition-transform duration-200"
+                  color={e.color}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    if (p.onDelete) {
+                      p.onDelete(e);
+                    }
+                  }}
+                />
+              </div>
+            </div>
           </div>
         );
       })}
