@@ -14,21 +14,7 @@ const MonthWeekDay: React.FC<IMonthWeekDay> = (p) => {
       as="div"
       className=" flex justify-center items-center gap-5"
     >
-      <div className="h-10 w-72 bg-gray-200 rounded-md grid grid-cols-3 p-1">
-        <Radio value="Month">
-          {({ checked }) => {
-            return (
-              <div
-                className={cn(
-                  "w-full h-full flex justify-center items-center cursor-pointer",
-                  checked ? "bg-white rounded-md font-medium" : "text-gray-700"
-                )}
-              >
-                Month
-              </div>
-            );
-          }}
-        </Radio>
+      <div className="h-10 w-72 bg-gray-200 rounded-md grid grid-cols-2 p-1">
         <Radio value="Week">
           {({ checked }) => {
             return (

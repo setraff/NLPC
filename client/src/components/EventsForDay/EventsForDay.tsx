@@ -7,6 +7,9 @@ import { MdDelete } from "react-icons/md";
 import { cn } from "../../utils/cn";
 import { FaEdit } from "react-icons/fa";
 import { LuDelete } from "react-icons/lu";
+import ModalProvider from "../ModalProvider/ModalProvider";
+import ModalButton from "../ModalProvider/ModalButton";
+import ModalPanel from "../ModalProvider/ModalPanel";
 
 interface IEventsForDay {
   events: Event[];
@@ -46,22 +49,26 @@ const EventsForDay: React.FC<IEventsForDay> = (p) => {
             <div className="flex justify-between">
               <span>{e.title}</span>
               <div className="flex space-x-1 absolute top-1 right-1">
-                {/* <FaEdit
-                  className="hover:text-black transform hover:scale-105 transition-transform duration-200"
-                  color={e.color}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => null}
-                /> */}
-                <MdDelete
-                  className="text-lg transform hover:scale-105 transition-transform duration-200"
-                  color={e.color}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    if (p.onDelete) {
-                      p.onDelete(e);
-                    }
-                  }}
-                />
+                <ModalProvider>
+                  <ModalButton>
+                    <MdDelete
+                      className="text-lg transform hover:scale-105 transition-transform duration-200"
+                      color={e.color}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </ModalButton>
+                  <ModalPanel
+                    onConfirm={() => {
+                      if (p.onDelete) {
+                        p.onDelete(e);
+                      }
+                    }}
+                    showFooter
+                    confirmText="Yes"
+                  >
+                    <div>Are you sure you want to delete this?</div>
+                  </ModalPanel>
+                </ModalProvider>
               </div>
             </div>
           </div>
