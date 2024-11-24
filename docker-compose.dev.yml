@@ -9,6 +9,7 @@ services:
       - 5432:5432
   nlpserver:
     build:
+      context: ./nlpserver
       dockerfile: Dockerfile
     ports:
       - 5000:5000

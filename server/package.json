@@ -8,7 +8,7 @@
     "dev": "dotenv -e env/.env.development -- tsx watch src/index.ts",
     "prisma-db-push:dev": "dotenv -e env/.env.development -- npx prisma db push --schema=src/prisma/schema.prisma",
     "prisma-studio:dev": "dotenv -e env/.env.development -- npx prisma studio --schema=src/prisma/schema.prisma",
-    "start": "node dist/index.js",
+    "start": "dotenv -e env/.env.production -- tsx watch src/index.ts",
     "tsc": "npx tsc"
   },
   "author": "",
