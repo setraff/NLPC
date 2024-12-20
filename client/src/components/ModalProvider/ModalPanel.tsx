@@ -49,6 +49,7 @@ const ModalPanel: React.FC<IModalPanel> = (p) => {
               {p.cancelText || "Cancel"}
             </Button>
             <Button
+              disabled={p.isLoading}
               onClick={() => {
                 if (p.onConfirm) {
                   p.onConfirm();

@@ -29,6 +29,7 @@ const EventsForDayQuery: React.FC<IEventsForDayQuery> = (p) => {
   return (
     <div className="col-span-7">
       <EventsForDay
+        isLoading={deleteMutation.isLoading || deleteMutation.isSuccess}
         onDelete={(e) => deleteMutation.mutate({ eventId: e.id })}
         events={events}
       />

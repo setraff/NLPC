@@ -14,6 +14,7 @@ import ModalPanel from "../ModalProvider/ModalPanel";
 interface IEventsForDay {
   events: Event[];
   className?: string;
+  isLoading?: boolean;
   onDelete?: (e: Event) => void;
 }
 
@@ -58,6 +59,7 @@ const EventsForDay: React.FC<IEventsForDay> = (p) => {
                     />
                   </ModalButton>
                   <ModalPanel
+                    isLoading={p.isLoading}
                     onConfirm={() => {
                       if (p.onDelete) {
                         p.onDelete(e);

@@ -16,7 +16,11 @@ const Button: React.FC<IButton> = (p) => {
       className={cn(
         "w-28 h-12 rounded-md",
         (p.variant === "primary" || !p.variant) &&
-          "bg-blue-500 hover:bg-blue-600 text-white",
+          cn(
+            p.disabled
+              ? "bg-gray-300 text-gray-500 font-semibold"
+              : "bg-blue-500 hover:bg-blue-600 text-white"
+          ),
         p.variant === "secondary" && "white hover:bg-gray-200 text-black"
       )}
     />

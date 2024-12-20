@@ -49,6 +49,7 @@ const EventsForWeek = () => {
         {events?.map((e) => {
           return (
             <EventsForDay
+              isLoading={deleteMutation.isLoading || deleteMutation.isSuccess}
               onDelete={(e) => deleteMutation.mutate({ eventId: e.id })}
               events={e}
             />
