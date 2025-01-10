@@ -18,7 +18,7 @@
     "jsx": "react-jsx",
 
     /* Linting */
-    "strict": false,
+    "strict": true,
     "rootDir": "../",
     "noUnusedLocals": false,
     "noUnusedParameters": false,

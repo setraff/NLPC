@@ -3,10 +3,9 @@ import p from "./prisma/p";
 import { environmentVariablesSchema } from "./utils/environmentVariablesSchema";
 
 const start = async () => {
-  console.log(process.env);
   try {
     environmentVariablesSchema.validateSync(process.env);
-    console.log("Connecting to database");
+    console.log(`Connecting to database ${process.env.DATABASE_URL}`);
     await p.$connect();
     console.log("Connected to database");
     app.listen(process.env.PORT, () => {

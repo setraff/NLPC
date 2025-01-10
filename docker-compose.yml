@@ -15,6 +15,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - ./server/env:/usr/src/app/server/env
     ports:
       - 3001:3001
 
