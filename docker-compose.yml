@@ -5,20 +5,18 @@ services:
       - POSTGRES_PASSWORD=example
     volumes:
       - pgdata-dev:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
   nlpserver:
     build:
       context: ./nlpserver
       dockerfile: Dockerfile
-    ports:
-      - 5000:5000
   nlpc:
+    depends_on:
+      - nlpserver
     build:
+      context: .
       dockerfile: Dockerfile
     ports:
       - 3001:3001
-      - 5173:5173
 
 volumes:
   pgdata-dev:

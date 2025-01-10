@@ -1,19 +1,6 @@
 import React from "react";
 import CalendarType from "../../types/CalendarType";
-import { RadioGroup } from "@headlessui/react";
-import { cn } from "../../utils/cn";
-import DayRadio from "../DayRadio/DayRadio";
-import WeekDaySelect from "../WeekDaySelect/WeekDaySelect";
-import EventsForDay from "../EventsForDay/EventsForDay";
-import {
-  eventsDay1,
-  eventsDay2,
-  eventsDay3,
-  eventsDay4,
-  eventsDay5,
-  eventsDay6,
-  eventsDay7,
-} from "../../data/events";
+
 import { oneHourInRem } from "../../utils/oneHourInRem";
 import { twentyFourHours } from "../../utils/twentyFourHours";
 import EventsForDayQuery from "../EventsForDayQuery/EventsForDayQuery";

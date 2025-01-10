@@ -19,6 +19,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(morgan("tiny"));
+app.use(express.static("./dist"));
 app.use(
   "/trpc",
   createExpressMiddleware({
@@ -27,5 +28,9 @@ app.use(
     onError: (e) => console.log(e.error),
   })
 );
+
+app.get("*", (_req, res) => {
+  res.sendFile("index.html", { root: "./dist" });
+});
 
 export default app;
