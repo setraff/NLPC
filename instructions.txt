@@ -1,0 +1,8 @@
+- Install docker: https://docs.docker.com/engine/install/
+- Install node.js: https://nodejs.org/en/download
+- run "docker compose -f docker-compose.dev.yml up"
+- run "npm i" on /client
+- run "npm i" on /server
+- run "npm run prisma-studio:dev" on /server
+- run "npm run dev" on /client
+- run "npm run dev" on /server
